@@ -2,6 +2,7 @@
 namespace common\models;
 
 use backend\models\Role;
+use backend\models\Status;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -64,7 +65,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status_id', 'default', 'value' => self::STATUS_ACTIVE],
+            [['status_id'], 'in', 'range' => array_keys($this->getStatusList())],
+
             ['role_id', 'default', 'value' => 10],
+            [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
+
             ['user_type_id', 'default', 'value' => 10],
 
             [['username', 'email'], 'required'],
@@ -75,7 +80,6 @@ class User extends ActiveRecord implements IdentityInterface
 
             ['email', 'email'],
 
-            [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
 
         ];
     }
@@ -262,6 +266,37 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $droption = Role::find()->asArray()->all();
         return ArrayHelper::map($droption, 'role_value', 'role_name');
+    }
+
+    /**
+     * Get relation to Status model
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(Status::className(), ['status_value' => 'status_id']);
+    }
+
+    /**
+     * Get status name
+     *
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return $this->status ? $this->status->status_name : '-no status-';
+    }
+
+    /**
+     * Get array for generating status dropdown
+     *
+     * @return array
+     */
+    public function getStatusList()
+    {
+        $droption = Status::find()->asArray()->all();
+        return ArrayHelper::map($droption, 'status_value', 'status_name');
     }
 
     /**
