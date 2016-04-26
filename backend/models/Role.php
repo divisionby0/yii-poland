@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -18,7 +19,7 @@ class Role extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'role';
+        return '{{role}}';
     }
 
     /**
@@ -43,5 +44,15 @@ class Role extends \yii\db\ActiveRecord
             'role_name' => 'Role Name',
             'role_value' => 'Role Value',
         ];
+    }
+
+    /**
+     * Adding relations to User
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['role_id', 'role_value']);
     }
 }
