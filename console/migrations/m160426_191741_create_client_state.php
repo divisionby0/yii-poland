@@ -9,21 +9,21 @@ class m160426_191741_create_client_state extends Migration
         // Create table
         $this->createTable('client_state', [
             'id' => $this->primaryKey(),
-            'order_state' => $this->string(20)->notNull()
+            'client_state' => $this->string(20)->notNull()
         ]);
 
         // Insert data
         $this->insert('client_state', [
-            'order_state' => 'Ожидает записи'
+            'client_state' => 'Ожидает записи'
         ]);
         $this->insert('client_state', [
-            'order_state' => 'В работе'
+            'client_state' => 'В работе'
         ]);
         $this->insert('client_state', [
-            'order_state' => 'Нерабочий PTN'
+            'client_state' => 'Нерабочий PTN'
         ]);
         $this->insert('client_state', [
-            'order_state' => 'Записан'
+            'client_state' => 'Записан'
         ]);
     }
 

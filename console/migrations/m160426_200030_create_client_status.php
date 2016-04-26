@@ -9,8 +9,8 @@ class m160426_200030_create_client_status extends Migration
         // Create table
         $this->createTable('client_status', [
             'id' => $this->primaryKey(),
-            'status_id' => $this->string(20)->notNull(),
-            'status' => $this->string(20)->notNull()
+            'status_id' => $this->string(10)->notNull(),
+            'status' => $this->string(10)->notNull()
         ]);
 
         // Insert data

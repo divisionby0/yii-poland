@@ -9,8 +9,8 @@ class m160426_061239_create_profile extends Migration
         $this->createTable('profile', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'first_name' => $this->text(),
-            'last_name' => $this->text(),
+            'first_name' => $this->string(255)->notNull(),
+            'last_name' => $this->string(255)->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime()
         ]);
