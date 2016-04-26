@@ -3,6 +3,7 @@ namespace common\models;
 
 use backend\models\Role;
 use backend\models\Status;
+use backend\models\UserType;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -71,6 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
 
             ['user_type_id', 'default', 'value' => 10],
+            [['user_type_id'], 'in', 'range' => array_keys($this->getUserTypeList())],
 
             [['username', 'email'], 'required'],
             [['username', 'email'], 'unique'],
@@ -297,6 +299,39 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $droption = Status::find()->asArray()->all();
         return ArrayHelper::map($droption, 'status_value', 'status_name');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserType()
+    {
+        return $this->hasOne(UserType::className(), ['user_type_value' => 'user_type_id']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserTypeName()
+    {
+        return $this->userType ? $this->userType->user_type_name : '-no user type-';
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserTypeList()
+    {
+        $droption = UserType::find()->asArray()->all();
+        return ArrayHelper::map($droption, 'user_type_value', 'user_type_name');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserTypeId()
+    {
+        return $this->userType ? $this->userType->id : 'none';
     }
 
     /**

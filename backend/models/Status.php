@@ -10,7 +10,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $status_name
- * @property string $status_value
+ * @property integer $status_value
  */
 class Status extends \yii\db\ActiveRecord
 {
@@ -29,8 +29,8 @@ class Status extends \yii\db\ActiveRecord
     {
         return [
             [['status_name', 'status_value'], 'required'],
+            [['status_value'], 'integer'],
             [['status_name'], 'string', 'max' => 45],
-            [['status_value'], 'string', 'max' => 6],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -29,7 +30,7 @@ class UserType extends \yii\db\ActiveRecord
         return [
             [['user_type_name', 'user_type_value'], 'required'],
             [['user_type_name'], 'string', 'max' => 45],
-            [['user_type_value'], 'string', 'max' => 6],
+            [['user_type_value'], 'integer'],
         ];
     }
 
@@ -40,8 +41,13 @@ class UserType extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_type_name' => 'User Type Name',
-            'user_type_value' => 'User Type Value',
+            'user_type_name' => 'Type Name',
+            'user_type_value' => 'Type Value',
         ];
+    }
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['user_type_is' => 'user_type_value']);
     }
 }

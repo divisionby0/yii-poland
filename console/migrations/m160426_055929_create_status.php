@@ -9,7 +9,7 @@ class m160426_055929_create_status extends Migration
         $this->createTable('status', [
             'id' => $this->primaryKey(),
             'status_name' => $this->string(45)->notNull(),
-            'status_value' => $this->string(6)->notNull()
+            'status_value' => $this->integer(6)->notNull()
         ]);
     }
 
