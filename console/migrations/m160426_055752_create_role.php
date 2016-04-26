@@ -9,7 +9,7 @@ class m160426_055752_create_role extends Migration
         $this->createTable('role', [
             'id' => $this->primaryKey(),
             'role_name' => $this->string(45)->notNull(),
-            'role_value' => $this->string()->notNull()
+            'role_value' => $this->integer(11)->notNull()
         ]);
     }
 
