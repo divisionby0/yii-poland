@@ -11,41 +11,39 @@ class m160426_061239_create_profile extends Migration
             'user_id' => $this->integer(11)->unsigned()->notNull(),
             'first_name' => $this->text(),
             'last_name' => $this->text(),
-            'birthdate' => $this->dateTime(),
-            'gender_id' => $this->integer(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime()
         ]);
 
-        $this->createIndex(
-            'idx-profile-gender_id',
-            'profile',
-            'gender_id'
-        );
-
-        $this->addForeignKey(
-            'fk-profile-gender_id',
-            'profile',
-            'gender_id',
-            'gender',
-            'id',
-            'CASCADE'
-        );
+//        $this->createIndex(
+//            'idx-profile-gender_id',
+//            'profile',
+//            'gender_id'
+//        );
+//
+//        $this->addForeignKey(
+//            'fk-profile-gender_id',
+//            'profile',
+//            'gender_id',
+//            'gender',
+//            'id',
+//            'CASCADE'
+//        );
     }
 
     public function down()
     {
-        // drops foreign key for table `user`
-        $this->dropForeignKey(
-            'fk-profile-gender_id',
-            'profile'
-        );
-
-        // drops index for column `author_id`
-        $this->dropIndex(
-            'idx-profile-gender_id',
-            'profile'
-        );
+//        // drops foreign key for table `user`
+//        $this->dropForeignKey(
+//            'fk-profile-gender_id',
+//            'profile'
+//        );
+//
+//        // drops index for column `author_id`
+//        $this->dropIndex(
+//            'idx-profile-gender_id',
+//            'profile'
+//        );
 
         $this->dropTable('profile');
     }
