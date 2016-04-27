@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use backend\models\ClientNationality;
 use Yii;
 use backend\models\ClientStatus;
 use yii\helpers\ArrayHelper;
@@ -29,8 +30,20 @@ use yii\helpers\ArrayHelper;
  * @property string $updated_at
  *
  * @property ClientStatus $clientStatus
- * @property ClientState $clientState
+ * @property string $clientStatusName
+ * @property array $clientStatusList
+ *
  * @property ClientPurpose $clientPurpose
+ * @property string $clientPurposeName
+ * @property array $clientPurposeList
+ *
+ * @property ClientNationality $clientNationality
+ * @property string $clientNationalityName
+ * @property array $clientNationalityList
+ *
+ * @property ClientState $clientState
+ * @property string $clientStateName
+ * @property array $clientStateList
  */
 class Client extends \yii\db\ActiveRecord
 {
@@ -57,6 +70,7 @@ class Client extends \yii\db\ActiveRecord
             [['ptn'], 'string', 'max' => 14],
             [['register_time'], 'string', 'max' => 5],
             [['client_state_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientState::className(), 'targetAttribute' => ['client_state_id' => 'id']],
+            // TODO add rules for status, state, nationality and purpose
         ];
     }
 
@@ -119,37 +133,6 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get relation to Client Order State table
-     *
-     * @return object ClientState
-     */
-    public function getClientState()
-    {
-        return $this->hasOne(ClientState::className(), ['id' => 'client_state_id']);
-    }
-
-    /**
-     * Get Client order state name
-     *
-     * @return string
-     */
-    public function getClientStateName()
-    {
-        return $this->clientState ? $this->clientState->client_state : '-';
-    }
-
-    /**
-     * Get Client order state array for using in select
-     *
-     * @return array
-     */
-    public function getClientStateList()
-    {
-        $droption = ClientState::find()->asArray()->all();
-        return ArrayHelper::map($droption, 'id', 'client_state');
-    }
-
-    /**
      * Get relation to Client Purpose table
      *
      * @return object ClientPurpose
@@ -178,5 +161,62 @@ class Client extends \yii\db\ActiveRecord
     {
         $droption = ClientPurpose::find()->asArray()->all();
         return ArrayHelper::map($droption, 'purpose_id', 'purpose');
+    }
+
+    /**
+     * Get relation to client_nationality table
+     *
+     * @return object ClientNationality
+     */
+    public function getClientNationality()
+    {
+        return $this->hasOne(ClientNationality::className(), ['nationality_id' => 'nationality_id']);
+    }
+
+    /**
+     * Get Client nationality name
+     *
+     * @return string
+     */
+    public function getClientNationalityName()
+    {
+        return $this->clientNationality ? $this->clientNationality->nationality : '-';
+    }
+
+    public function getClientNationalityList()
+    {
+        $droption = ClientNationality::find()->asArray()->all();
+        return ArrayHelper::map($droption, 'nationality_id', 'nationality');
+    }
+
+    /**
+     * Get relation to Client Order State table
+     *
+     * @return object ClientState
+     */
+    public function getClientState()
+    {
+        return $this->hasOne(ClientState::className(), ['id' => 'client_state_id']);
+    }
+
+    /**
+     * Get Client order state name
+     *
+     * @return string
+     */
+    public function getClientStateName()
+    {
+        return $this->clientState ? $this->clientState->client_state : '-';
+    }
+
+    /**
+     * Get Client order state array for using in select
+     *
+     * @return array
+     */
+    public function getClientStateList()
+    {
+        $droption = ClientState::find()->asArray()->all();
+        return ArrayHelper::map($droption, 'id', 'client_state');
     }
 }
