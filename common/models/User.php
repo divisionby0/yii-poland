@@ -1,18 +1,19 @@
 <?php
 namespace common\models;
 
-use backend\models\Role;
-use backend\models\Status;
-use backend\models\UserType;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
-use yii\debug\models\search\Profile;
 use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 use yii\base\Security;
+use backend\models\Role;
+use backend\models\Status;
+use backend\models\UserType;
+use frontend\models\Profile;
+use frontend\models\Client;
 
 /**
  * User model
@@ -339,8 +340,19 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @return \yii\db\ActiveQuery
      */
+
+    public function getClients()
+    {
+        return $this->hasMany(Client::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Get relation with profile table
+     *
+     * @return object Profile
+     */
     public function getProfile()
     {
-        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+        return $this->hasOne(Profile::className(), ['user_id', 'id']);
     }
 }

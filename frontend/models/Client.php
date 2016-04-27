@@ -2,10 +2,16 @@
 
 namespace frontend\models;
 
-use backend\models\ClientNationality;
+use common\models\User;
 use Yii;
 use backend\models\ClientStatus;
+use backend\models\ClientPurpose;
+use backend\models\ClientNationality;
+use backend\models\ClientState;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "client".
@@ -26,6 +32,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $client_state_id
  * @property string $register_date
  * @property string $register_time
+ * @property integer $user_id
  * @property string $created_at
  * @property string $updated_at
  *
@@ -44,6 +51,8 @@ use yii\helpers\ArrayHelper;
  * @property ClientState $clientState
  * @property string $clientStateName
  * @property array $clientStateList
+ *
+ * @property User $user
  */
 class Client extends \yii\db\ActiveRecord
 {
@@ -56,13 +65,32 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
+     * Set behaviors
+     *
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id', 'client_state_id', 'register_date', 'register_time'], 'required'],
-            [['purpose_id', 'nationality_id', 'client_state_id'], 'integer'],
+            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id', 'client_state_id', 'register_date', 'register_time', 'user_id'], 'required'],
+            [['purpose_id', 'nationality_id', 'client_state_id', 'user_id'], 'integer'],
             [['client_state_id'], 'default', 'value' => 1],
             [['created_at', 'updated_at'], 'safe'],
             [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
@@ -218,5 +246,10 @@ class Client extends \yii\db\ActiveRecord
     {
         $droption = ClientState::find()->asArray()->all();
         return ArrayHelper::map($droption, 'id', 'client_state');
+    }
+
+    public function getUser()
+    {
+        $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

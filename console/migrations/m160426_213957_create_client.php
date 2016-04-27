@@ -23,6 +23,7 @@ class m160426_213957_create_client extends Migration
             'client_state_id' => $this->integer(11)->notNull(),
             'register_date' => $this->string(10)->notNull(),
             'register_time' => $this->string(5)->notNull(),
+            'user_id' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime()
         ]);
@@ -41,10 +42,35 @@ class m160426_213957_create_client extends Migration
             'id',
             'CASCADE'
         );
+
+        $this->createIndex(
+            'idx-client-user_id',
+            'client',
+            'user_id'
+        );
+
+        $this->addForeignKey(
+            'fk-client-user_id',
+            'client',
+            'user_id',
+            'user',
+            'id',
+            'CASCADE'
+        );
     }
 
     public function down()
     {
+        $this->dropForeignKey(
+            'fk-client-user_id',
+            'client'
+        );
+
+        $this->dropIndex(
+            'idx-client-user_id',
+            'client'
+        );
+
         $this->dropForeignKey(
             'fk-client-client_state_id',
             'client'

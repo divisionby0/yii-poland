@@ -14,7 +14,6 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property Gender $gender
  */
 class Profile extends \yii\db\ActiveRecord
 {

@@ -13,11 +13,11 @@ class m160426_055752_create_role extends Migration
         ]);
 
         // Insert data
-        $this->insert('client_state', [
+        $this->insert('role', [
             'role_name' => 'Администратор',
             'role_value' => '30',
         ]);
-        $this->insert('client_state', [
+        $this->insert('role', [
             'role_name' => 'Пользователь',
             'role_value' => '10',
         ]);
