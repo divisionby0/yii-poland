@@ -18,6 +18,10 @@ class m160426_055752_create_role extends Migration
             'role_value' => '30',
         ]);
         $this->insert('role', [
+            'role_name' => 'Супервизор',
+            'role_value' => '20',
+        ]);
+        $this->insert('role', [
             'role_name' => 'Пользователь',
             'role_value' => '10',
         ]);
