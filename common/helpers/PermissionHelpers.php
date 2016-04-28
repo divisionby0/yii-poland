@@ -2,13 +2,10 @@
 
 namespace common\helpers;
 
-use common\helpers\ValueHelpers;
-use common\helpers\ValueHelpers;
-use common\helpers\ValueHelpers;
-use common\helpers\ValueHelpers;
 use yii;
 use yii\web\Controller;
 use yii\helpers\Url;
+use common\helpers\ValueHelpers;
 
 class PermissionHelpers
 {
@@ -75,6 +72,32 @@ class PermissionHelpers
     public static function requireMinimumStatus($status_name)
     {
         if(Yii::$app->user->identity->status_id >= ValueHelpers::getStatusValue($status_name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @requireRole
+     * @param mixed $role_name
+     */
+    public static function requireRole($role_name)
+    {
+        if(Yii::$app->user->identity->role_id == ValueHelpers::getRoleValue($role_name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @requireMinimumRole
+     * @param mixed $role_name
+     */
+    public static function requireMinimumRole($role_name)
+    {
+        if(Yii::$app->user->identity->role_id >= ValueHelpers::getRoleValue($role_name)){
             return true;
         } else {
             return false;
