@@ -192,7 +192,7 @@ class Client extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get relation to client_nationality table
+     * Get relation to client-nationality table
      *
      * @return object ClientNationality
      */
