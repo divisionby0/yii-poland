@@ -20,7 +20,7 @@ use frontend\models\Client;
  *
  * @property integer $id
  * @property string $username
- * @property string $firs_name
+ * @property string $first_name
  * @property string $last_name
  * @property string $password_hash
  * @property string $password_reset_token
@@ -81,20 +81,15 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'first_name', 'last_name', 'email'], 'required'],
             [['username', 'first_name', 'last_name', 'email'], 'filter', 'filter' => 'trim'],
             [['first_name', 'last_name'], 'string', 'max' => 120],
+            [['username', 'email'], 'unique'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['email', 'email'],
 
             ['status_id', 'default', 'value' => self::STATUS_ACTIVE],
             [['status_id'], 'in', 'range' => array_keys($this->getStatusList())],
 
             ['role_id', 'default', 'value' => 10],
             [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
-
-            [['username', 'email'], 'unique'],
-
-            ['username', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'email'],
-
-
         ];
     }
 
@@ -107,6 +102,8 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'username' => 'Username',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
             'email' => 'Email',
         ];
     }
@@ -311,14 +308,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $droption = Status::find()->asArray()->all();
         return ArrayHelper::map($droption, 'status_value', 'status_name');
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserTypeId()
-    {
-        return $this->userType ? $this->userType->id : 'none';
     }
 
     /**

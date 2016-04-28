@@ -11,6 +11,8 @@ use Yii;
 class SignupForm extends Model
 {
     public $username;
+    public $first_name;
+    public $last_name;
     public $email;
     public $password;
 
@@ -20,8 +22,8 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['username', 'email', 'password'], 'required'],
-            [['username', 'email'], 'filter', 'filter' => 'trim'],
+            [['username', 'first_name', 'last_name', 'email', 'password'], 'required'],
+            [['username', 'first_name', 'last_name', 'email'], 'filter', 'filter' => 'trim'],
 
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
@@ -47,6 +49,8 @@ class SignupForm extends Model
         
         $user = new User();
         $user->username = $this->username;
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
