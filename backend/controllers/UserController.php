@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+
+use common\models\User;
+use backend\models\UserCreateForm;
+use backend\models\UserSearch;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -20,6 +23,16 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'error'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -63,13 +76,14 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model = new UserCreateForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->create()) {
+                return $this->redirect(['view', 'id' => $user->id]);
+            }
         } else {
             return $this->render('create', [
-                'model' => $model,
+            'model' => $model,
             ]);
         }
     }

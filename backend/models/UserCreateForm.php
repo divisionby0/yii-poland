@@ -1,21 +1,28 @@
 <?php
-namespace frontend\models;
+namespace backend\models;
 
 use Yii;
-use yii\base\Model;
+use yii\db\ActiveRecord;
 
 use common\models\User;
 
-/**
- * Signup form
- */
-class SignupForm extends Model
+class UserCreateForm extends ActiveRecord
 {
     public $username;
     public $first_name;
     public $last_name;
     public $email;
     public $password;
+    public $role_id;
+    public $status_id;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
 
     public function rules()
     {
@@ -35,16 +42,16 @@ class SignupForm extends Model
     }
 
     /**
-     * Signs user up.
+     * Create user.
      *
      * @return User|null the saved model or null if saving fails
      */
-    public function signup()
+    public function create()
     {
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->first_name = $this->first_name;
@@ -52,7 +59,6 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
         return $user->save() ? $user : null;
     }
 }

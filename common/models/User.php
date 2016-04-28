@@ -27,7 +27,6 @@ use frontend\models\Client;
  * @property string $email
  * @property string $auth_key
  * @property integer $role_id
- * @property integer $user_type_id
  * @property integer $status_id
  * @property integer $created_at
  * @property integer $updated_at
@@ -101,10 +100,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'username' => 'Username',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
+            'username' => 'Логин',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
             'email' => 'Email',
+            'statusName' => 'Статус',
+            'roleName' => 'Роль',
         ];
     }
 
@@ -190,6 +191,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
         return $this->auth_key;
+    }
+
+    /**
+     * Get Full Name
+     *
+     * @return string $fullName
+     */
+    public function getFullName()
+    {
+        return $this->first_name . " " . $this->last_name;
     }
 
     /**
