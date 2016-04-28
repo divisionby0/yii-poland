@@ -20,6 +20,8 @@ use frontend\models\Client;
  *
  * @property integer $id
  * @property string $username
+ * @property string $firs_name
+ * @property string $last_name
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -30,6 +32,16 @@ use frontend\models\Client;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property object Role $role
+ * @property string $roleName
+ * @property array $roleList
+ *
+ * @property object Status $status
+ * @property string $statusName
+ * @property array $statusList
+ *
+ * @property object Client $clients
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -66,18 +78,17 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username', 'first_name', 'last_name', 'email'], 'required'],
+            [['username', 'first_name', 'last_name', 'email'], 'filter', 'filter' => 'trim'],
+            [['first_name', 'last_name'], 'string', 'max' => 120],
+
             ['status_id', 'default', 'value' => self::STATUS_ACTIVE],
             [['status_id'], 'in', 'range' => array_keys($this->getStatusList())],
 
             ['role_id', 'default', 'value' => 10],
             [['role_id'], 'in', 'range' => array_keys($this->getRoleList())],
 
-            ['user_type_id', 'default', 'value' => 10],
-            [['user_type_id'], 'in', 'range' => array_keys($this->getUserTypeList())],
-
-            [['username', 'email'], 'required'],
             [['username', 'email'], 'unique'],
-            [['username', 'email'], 'filter', 'filter' => 'trim'],
 
             ['username', 'string', 'min' => 2, 'max' => 255],
 
@@ -303,31 +314,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserType()
-    {
-        return $this->hasOne(UserType::className(), ['user_type_value' => 'user_type_id']);
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserTypeName()
-    {
-        return $this->userType ? $this->userType->user_type_name : '-no user type-';
-    }
-
-    /**
-     * @return array
-     */
-    public function getUserTypeList()
-    {
-        $droption = UserType::find()->asArray()->all();
-        return ArrayHelper::map($droption, 'user_type_value', 'user_type_name');
-    }
-
-    /**
      * @return string
      */
     public function getUserTypeId()
@@ -336,23 +322,12 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Get current user profile
+     * Get relation with client table
      *
      * @return \yii\db\ActiveQuery
      */
-
     public function getClients()
     {
         return $this->hasMany(Client::className(), ['user_id' => 'id']);
-    }
-
-    /**
-     * Get relation with profile table
-     *
-     * @return object Profile
-     */
-    public function getProfile()
-    {
-        return $this->hasOne(Profile::className(), ['user_id', 'id']);
     }
 }
