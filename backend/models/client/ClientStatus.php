@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\client;
 
 use frontend\models\Client;
 use Yii;
@@ -40,8 +40,8 @@ class ClientStatus extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'status_id' => 'Status ID',
-            'status' => 'Status',
+            'status_id' => 'Идентификатор статуса',
+            'status' => 'Статус',
         ];
     }
 

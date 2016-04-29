@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ClientNationalitySearch */
+/* @var $searchModel backend\models\client\ClientStatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $index_label;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="client-nationality-index">
+<div class="client-status-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить национальность', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить статус клиента', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'nationality_id',
-            'nationality',
+            'status_id',
+            'status',
 
             ['class' => 'common\components\ActionColumn'],
         ],

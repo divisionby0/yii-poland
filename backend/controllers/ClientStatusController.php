@@ -5,21 +5,21 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
-use backend\models\client\ClientNationality;
-use backend\models\client\ClientNationalitySearch;
+use backend\models\client\ClientStatus;
+use backend\models\client\ClientStatusSearch;
 
 use common\helpers\PermissionHelpers;
 
 /**
- * ClientNationalityController implements the CRUD actions for ClientNationality model.
+ * ClientStatusController implements the CRUD actions for ClientStatus model.
  */
-class ClientNationalityController extends Controller
+class ClientStatusController extends Controller
 {
 
-    public $index_label = 'Национальность клиента';
+    public $index_label = 'Статус клиента';
 
     /**
      * @inheritdoc
@@ -47,14 +47,14 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Lists all ClientNationality models.
+     * Lists all ClientStatus models.
      * @return mixed
      */
     public function actionIndex()
     {
         PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
-        $searchModel = new ClientNationalitySearch();
+        $searchModel = new ClientStatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,7 +65,7 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Displays a single ClientNationality model.
+     * Displays a single ClientStatus model.
      * @param integer $id
      * @return mixed
      */
@@ -80,7 +80,7 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Creates a new ClientNationality model.
+     * Creates a new ClientStatus model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -88,7 +88,7 @@ class ClientNationalityController extends Controller
     {
         PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
-        $model = new ClientNationality();
+        $model = new ClientStatus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +101,7 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Updates an existing ClientNationality model.
+     * Updates an existing ClientStatus model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -123,7 +123,7 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Deletes an existing ClientNationality model.
+     * Deletes an existing ClientStatus model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -138,15 +138,15 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Finds the ClientNationality model based on its primary key value.
+     * Finds the ClientStatus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ClientNationality the loaded model
+     * @return ClientStatus the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ClientNationality::findOne($id)) !== null) {
+        if (($model = ClientStatus::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

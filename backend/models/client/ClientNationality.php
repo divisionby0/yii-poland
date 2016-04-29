@@ -42,8 +42,8 @@ class ClientNationality extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nationality_id' => 'Nationality ID',
-            'nationality' => 'Nationality',
+            'nationality_id' => 'Идентификатор',
+            'nationality' => 'Национальность',
         ];
     }
 

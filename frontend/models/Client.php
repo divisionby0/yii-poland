@@ -9,7 +9,7 @@ use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
-use backend\models\ClientStatus;
+use backend\models\client\ClientStatus;
 use backend\models\client\ClientPurpose;
 use backend\models\client\ClientNationality;
 use backend\models\client\ClientState;
