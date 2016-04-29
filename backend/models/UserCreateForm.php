@@ -3,6 +3,7 @@ namespace backend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 use common\models\User;
 
@@ -14,7 +15,6 @@ class UserCreateForm extends ActiveRecord
     public $email;
     public $password;
     public $role_id;
-    //public $status_id;
     public $roleList;
 
     /**
@@ -38,6 +38,9 @@ class UserCreateForm extends ActiveRecord
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
+            ['role_id', 'default', 'value' => 10],
+            [['role_id'], 'in', 'range' => array_keys(ArrayHelper::map(Role::find()->asArray()->all(), 'role_value', 'role_name'))],
+
             ['password', 'string', 'min' => 6],
         ];
     }
@@ -56,7 +59,6 @@ class UserCreateForm extends ActiveRecord
             'email' => 'Email',
             'password' => 'Пароль',
             'role_id' => 'Роль',
-            //'status_id' => 'Статус',
         ];
     }
 
@@ -76,6 +78,7 @@ class UserCreateForm extends ActiveRecord
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
+        $user->role_id = $this->role_id;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         return $user->save() ? $user : null;

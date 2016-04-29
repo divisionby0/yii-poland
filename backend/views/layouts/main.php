@@ -43,6 +43,16 @@ AppAsset::register($this);
         $user_label = PermissionHelpers::requireMinimumRole('Супервизор') ? 'Пользователи' : 'Ваш профиль';
         $menuItems[] = ['label' => $user_label, 'url' => ['/user/index']];
 
+        if (PermissionHelpers::requireMinimumRole('Супервизор')) {
+            $menuItems[] = [
+                'label' => 'Настройки',
+                'items' => [
+                    ['label' => 'Национальность', 'url' => ['/client-nationality/index']],
+                    ['label' => 'ППВА', 'url' => ['/client-ppva/index']],
+                ],
+            ];
+        }
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
