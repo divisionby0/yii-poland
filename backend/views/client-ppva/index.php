@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'ppva_id',
             'ppva',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'common\components\ActionColumn'],
         ],
     ]); ?>
 </div>

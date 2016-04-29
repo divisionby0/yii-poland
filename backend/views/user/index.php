@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'roleName',
             'statusName',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'common\components\ActionColumn'],
         ],
     ]); ?>
 </div>

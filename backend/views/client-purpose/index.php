@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $index_label;
             'purpose_id',
             'purpose',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'common\components\ActionColumn'],
         ],
     ]); ?>
 </div>
