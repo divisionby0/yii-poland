@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ClientPpvaSearch */
+/* @var $searchModel backend\models\client\ClientPpvaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Список ППВА';
