@@ -1,16 +1,17 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\client;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\ClientNationality;
+
+use backend\models\client\ClientPpva;
 
 /**
- * ClientNationalitySearch represents the model behind the search form about `backend\models\ClientNationality`.
+ * ClientPpvaSearch represents the model behind the search form about `backend\models\ClientPpva`.
  */
-class ClientNationalitySearch extends ClientNationality
+class ClientPpvaSearch extends ClientPpva
 {
     /**
      * @inheritdoc
@@ -18,8 +19,8 @@ class ClientNationalitySearch extends ClientNationality
     public function rules()
     {
         return [
-            [['id', 'nationality_id'], 'integer'],
-            [['nationality'], 'safe'],
+            [['id', 'ppva_id'], 'integer'],
+            [['ppva'], 'safe'],
         ];
     }
 
@@ -41,7 +42,7 @@ class ClientNationalitySearch extends ClientNationality
      */
     public function search($params)
     {
-        $query = ClientNationality::find();
+        $query = ClientPpva::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +61,10 @@ class ClientNationalitySearch extends ClientNationality
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'nationality_id' => $this->nationality_id,
+            'ppva_id' => $this->ppva_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nationality', $this->nationality]);
+        $query->andFilterWhere(['like', 'ppva', $this->ppva]);
 
         return $dataProvider;
     }

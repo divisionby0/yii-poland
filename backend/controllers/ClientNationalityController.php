@@ -4,11 +4,12 @@ namespace backend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use backend\models\ClientNationality;
-use backend\models\ClientNationalitySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use backend\models\client\ClientNationality;
+use backend\models\client\ClientNationalitySearch;
 
 /**
  * ClientNationalityController implements the CRUD actions for ClientNationality model.

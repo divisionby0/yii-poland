@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\models;
+namespace backend\models\client;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\ClientPpva;
+use backend\models\client\ClientPurpose;
 
 /**
- * ClientPpvaSearch represents the model behind the search form about `backend\models\ClientPpva`.
+ * ClientPurposeSearch represents the model behind the search form about `backend\models\client\ClientPurpose`.
  */
-class ClientPpvaSearch extends ClientPpva
+class ClientPurposeSearch extends ClientPurpose
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ClientPpvaSearch extends ClientPpva
     public function rules()
     {
         return [
-            [['id', 'ppva_id'], 'integer'],
-            [['ppva'], 'safe'],
+            [['id', 'purpose_id'], 'integer'],
+            [['purpose'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ClientPpvaSearch extends ClientPpva
      */
     public function search($params)
     {
-        $query = ClientPpva::find();
+        $query = ClientPurpose::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +60,10 @@ class ClientPpvaSearch extends ClientPpva
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ppva_id' => $this->ppva_id,
+            'purpose_id' => $this->purpose_id,
         ]);
 
-        $query->andFilterWhere(['like', 'ppva', $this->ppva]);
+        $query->andFilterWhere(['like', 'purpose', $this->purpose]);
 
         return $dataProvider;
     }

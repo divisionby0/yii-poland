@@ -3,20 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\client\ClientPurpose;
+use backend\models\client\ClientPurposeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
-use backend\models\client\ClientPpva;
-use backend\models\client\ClientPpvaSearch;
-
-use common\helpers\PermissionHelpers;
-
 /**
- * ClientPpvaController implements the CRUD actions for ClientPpva model.
+ * ClientPurposeController implements the CRUD actions for ClientPurpose model.
  */
-class ClientPpvaController extends Controller
+class ClientPurposeController extends Controller
 {
     /**
      * @inheritdoc
@@ -24,17 +20,6 @@ class ClientPpvaController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'create', 'update', 'delete', 'error'],
-                'rules' => [
-                    [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'error'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -45,12 +30,12 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Lists all ClientPpva models.
+     * Lists all ClientPurpose models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ClientPpvaSearch();
+        $searchModel = new ClientPurposeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +45,7 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Displays a single ClientPpva model.
+     * Displays a single ClientPurpose model.
      * @param integer $id
      * @return mixed
      */
@@ -72,13 +57,13 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Creates a new ClientPpva model.
+     * Creates a new ClientPurpose model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ClientPpva();
+        $model = new ClientPurpose();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +75,7 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Updates an existing ClientPpva model.
+     * Updates an existing ClientPurpose model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,7 +94,7 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Deletes an existing ClientPpva model.
+     * Deletes an existing ClientPurpose model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,15 +107,15 @@ class ClientPpvaController extends Controller
     }
 
     /**
-     * Finds the ClientPpva model based on its primary key value.
+     * Finds the ClientPurpose model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ClientPpva the loaded model
+     * @return ClientPurpose the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ClientPpva::findOne($id)) !== null) {
+        if (($model = ClientPurpose::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

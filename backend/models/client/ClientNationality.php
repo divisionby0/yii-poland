@@ -1,6 +1,7 @@
 <?php
 
-namespace backend\models;
+//namespace backend\models;
+namespace backend\models\client;
 
 use frontend\models\Client;
 use Yii;

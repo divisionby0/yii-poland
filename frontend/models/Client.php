@@ -4,14 +4,15 @@ namespace frontend\models;
 
 use common\models\User;
 use Yii;
-use backend\models\ClientStatus;
-use backend\models\ClientPurpose;
-use backend\models\ClientNationality;
-use backend\models\ClientState;
 use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use yii\db\Expression;
+
+use backend\models\ClientStatus;
+use backend\models\client\ClientPurpose;
+use backend\models\client\ClientNationality;
+use backend\models\ClientState;
 
 /**
  * This is the model class for table "client".
