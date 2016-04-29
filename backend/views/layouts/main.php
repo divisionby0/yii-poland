@@ -50,6 +50,7 @@ AppAsset::register($this);
                     ['label' => 'Национальность', 'url' => ['/client-nationality/index']],
                     ['label' => 'ППВА', 'url' => ['/client-ppva/index']],
                     ['label' => 'Цель визита', 'url' => ['/client-purpose/index']],
+                    ['label' => 'Состояние заявки', 'url' => ['/client-state/index']],
                 ],
             ];
         }

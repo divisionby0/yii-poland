@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 use backend\models\ClientStatus;
 use backend\models\client\ClientPurpose;
 use backend\models\client\ClientNationality;
-use backend\models\ClientState;
+use backend\models\client\ClientState;
 
 /**
  * This is the model class for table "client".

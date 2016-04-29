@@ -5,19 +5,22 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
-use backend\models\client\ClientNationality;
-use backend\models\client\ClientNationalitySearch;
+use backend\models\client\ClientState;
+use backend\models\client\ClientStateSearch;
 
 use common\helpers\PermissionHelpers;
 
 /**
- * ClientNationalityController implements the CRUD actions for ClientNationality model.
+ * ClientStateController implements the CRUD actions for ClientState model.
  */
-class ClientNationalityController extends Controller
+class ClientStateController extends Controller
 {
+
+    public $index_label = 'Состояние заявки';
+
     /**
      * @inheritdoc
      */
@@ -44,24 +47,25 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Lists all ClientNationality models.
+     * Lists all ClientState models.
      * @return mixed
      */
     public function actionIndex()
     {
         PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
-        $searchModel = new ClientNationalitySearch();
+        $searchModel = new ClientStateSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'index_label' => $this->index_label,
         ]);
     }
 
     /**
-     * Displays a single ClientNationality model.
+     * Displays a single ClientState model.
      * @param integer $id
      * @return mixed
      */
@@ -71,11 +75,12 @@ class ClientNationalityController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'index_label' => $this->index_label,
         ]);
     }
 
     /**
-     * Creates a new ClientNationality model.
+     * Creates a new ClientState model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -83,19 +88,20 @@ class ClientNationalityController extends Controller
     {
         PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
-        $model = new ClientNationality();
+        $model = new ClientState();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }
 
     /**
-     * Updates an existing ClientNationality model.
+     * Updates an existing ClientState model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,12 +117,13 @@ class ClientNationalityController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }
 
     /**
-     * Deletes an existing ClientNationality model.
+     * Deletes an existing ClientState model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -131,15 +138,15 @@ class ClientNationalityController extends Controller
     }
 
     /**
-     * Finds the ClientNationality model based on its primary key value.
+     * Finds the ClientState model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ClientNationality the loaded model
+     * @return ClientState the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ClientNationality::findOne($id)) !== null) {
+        if (($model = ClientState::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

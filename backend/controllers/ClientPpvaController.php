@@ -18,6 +18,8 @@ use common\helpers\PermissionHelpers;
  */
 class ClientPpvaController extends Controller
 {
+    public $index_label = 'Список ППВА';
+
     /**
      * @inheritdoc
      */
@@ -50,6 +52,8 @@ class ClientPpvaController extends Controller
      */
     public function actionIndex()
     {
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
+
         $searchModel = new ClientPpvaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -66,6 +70,8 @@ class ClientPpvaController extends Controller
      */
     public function actionView($id)
     {
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -78,6 +84,8 @@ class ClientPpvaController extends Controller
      */
     public function actionCreate()
     {
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
+
         $model = new ClientPpva();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -97,6 +105,8 @@ class ClientPpvaController extends Controller
      */
     public function actionUpdate($id)
     {
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -116,6 +126,8 @@ class ClientPpvaController extends Controller
      */
     public function actionDelete($id)
     {
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

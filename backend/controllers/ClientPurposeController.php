@@ -71,9 +71,7 @@ class ClientPurposeController extends Controller
      */
     public function actionView($id)
     {
-        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
-            return $this->redirect(['user/index']);
-        }
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -88,9 +86,7 @@ class ClientPurposeController extends Controller
      */
     public function actionCreate()
     {
-        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
-            return $this->redirect(['user/index']);
-        }
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
         $model = new ClientPurpose();
 
@@ -112,9 +108,7 @@ class ClientPurposeController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
-            return $this->redirect(['user/index']);
-        }
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
         $model = $this->findModel($id);
 
@@ -136,9 +130,7 @@ class ClientPurposeController extends Controller
      */
     public function actionDelete($id)
     {
-        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
-            return $this->redirect(['user/index']);
-        }
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
         $this->findModel($id)->delete();
 

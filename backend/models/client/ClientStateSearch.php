@@ -5,13 +5,12 @@ namespace backend\models\client;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
-use backend\models\client\ClientPpva;
+use backend\models\client\ClientState;
 
 /**
- * ClientPpvaSearch represents the model behind the search form about `backend\models\ClientPpva`.
+ * ClientStateSearch represents the model behind the search form about `backend\models\client\ClientState`.
  */
-class ClientPpvaSearch extends ClientPpva
+class ClientStateSearch extends ClientState
 {
     /**
      * @inheritdoc
@@ -19,8 +18,8 @@ class ClientPpvaSearch extends ClientPpva
     public function rules()
     {
         return [
-            [['id', 'ppva_id'], 'integer'],
-            [['ppva'], 'safe'],
+            [['id'], 'integer'],
+            [['client_state'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class ClientPpvaSearch extends ClientPpva
      */
     public function search($params)
     {
-        $query = ClientPpva::find();
+        $query = ClientState::find();
 
         // add conditions that should always apply here
 
@@ -61,10 +60,9 @@ class ClientPpvaSearch extends ClientPpva
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ppva_id' => $this->ppva_id,
         ]);
 
-        $query->andFilterWhere(['like', 'ppva', $this->ppva]);
+        $query->andFilterWhere(['like', 'client_state', $this->client_state]);
 
         return $dataProvider;
     }
