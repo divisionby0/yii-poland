@@ -93,7 +93,8 @@ class PermissionHelpers
     public static function checkPermission($minimum_role, $redirect)
     {
         if (!PermissionHelpers::requireMinimumRole($minimum_role)) {
-            return $this->redirect([$redirect]);
+            //return $this->redirect([$redirect]);
+            return Yii::$app->response->redirect(Url::to([$redirect]));
         }
     }
 }

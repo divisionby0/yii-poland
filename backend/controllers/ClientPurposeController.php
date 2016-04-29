@@ -51,9 +51,8 @@ class ClientPurposeController extends Controller
      */
     public function actionIndex()
     {
-        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
-            return $this->redirect(['user/index']);
-        }
+
+        PermissionHelpers::checkPermission('Супервизор', 'user/index');
 
         $searchModel = new ClientPurposeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
