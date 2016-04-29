@@ -49,6 +49,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Национальность', 'url' => ['/client-nationality/index']],
                     ['label' => 'ППВА', 'url' => ['/client-ppva/index']],
+                    ['label' => 'Цель визита', 'url' => ['/client-purpose/index']],
                 ],
             ];
         }

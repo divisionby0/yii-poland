@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\client\ClientPurpose */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Client Purposes', 'url' => ['index']];
+$this->title = $model->purpose;
+$this->params['breadcrumbs'][] = ['label' => $index_label, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-purpose-view">
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'purpose_id',
             'purpose',
         ],

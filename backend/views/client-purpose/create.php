@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\client\ClientPurpose */
 
-$this->title = 'Create Client Purpose';
-$this->params['breadcrumbs'][] = ['label' => 'Client Purposes', 'url' => ['index']];
+$this->title = 'Добавить цель визита';
+$this->params['breadcrumbs'][] = ['label' => $index_label, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-purpose-create">

@@ -3,23 +3,39 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\client\ClientPurpose;
-use backend\models\client\ClientPurposeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+
+use backend\models\client\ClientPurpose;
+use backend\models\client\ClientPurposeSearch;
+
+use common\helpers\PermissionHelpers;
 
 /**
  * ClientPurposeController implements the CRUD actions for ClientPurpose model.
  */
 class ClientPurposeController extends Controller
 {
+    public $index_label = 'Цель визита';
+
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -35,12 +51,17 @@ class ClientPurposeController extends Controller
      */
     public function actionIndex()
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $searchModel = new ClientPurposeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'index_label' => $this->index_label,
         ]);
     }
 
@@ -51,8 +72,13 @@ class ClientPurposeController extends Controller
      */
     public function actionView($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'index_label' => $this->index_label,
         ]);
     }
 
@@ -63,6 +89,10 @@ class ClientPurposeController extends Controller
      */
     public function actionCreate()
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $model = new ClientPurpose();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -70,6 +100,7 @@ class ClientPurposeController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }
@@ -82,6 +113,10 @@ class ClientPurposeController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -89,6 +124,7 @@ class ClientPurposeController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }
@@ -101,6 +137,10 @@ class ClientPurposeController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

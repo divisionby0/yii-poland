@@ -40,8 +40,8 @@ class ClientPurpose extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'purpose_id' => 'Purpose ID',
-            'purpose' => 'Purpose',
+            'purpose_id' => 'Идентификатор цели визита',
+            'purpose' => 'Цель визита',
         ];
     }
 

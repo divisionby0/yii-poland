@@ -89,4 +89,11 @@ class PermissionHelpers
             return false;
         }
     }
+
+    public static function checkPermission($minimum_role, $redirect)
+    {
+        if (!PermissionHelpers::requireMinimumRole($minimum_role)) {
+            return $this->redirect([$redirect]);
+        }
+    }
 }

@@ -3,13 +3,15 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 use backend\models\client\ClientNationality;
 use backend\models\client\ClientNationalitySearch;
+
+use common\helpers\PermissionHelpers;
 
 /**
  * ClientNationalityController implements the CRUD actions for ClientNationality model.
@@ -47,6 +49,10 @@ class ClientNationalityController extends Controller
      */
     public function actionIndex()
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $searchModel = new ClientNationalitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -63,6 +69,10 @@ class ClientNationalityController extends Controller
      */
     public function actionView($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -75,6 +85,10 @@ class ClientNationalityController extends Controller
      */
     public function actionCreate()
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $model = new ClientNationality();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -94,6 +108,10 @@ class ClientNationalityController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -113,6 +131,10 @@ class ClientNationalityController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->redirect(['user/index']);
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
