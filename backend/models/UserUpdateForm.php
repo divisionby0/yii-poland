@@ -15,7 +15,6 @@ class UserCreateForm extends ActiveRecord
     public $password;
     public $role_id;
     public $status_id;
-    public $roleList;
 
     /**
      * @inheritdoc
@@ -28,7 +27,7 @@ class UserCreateForm extends ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'first_name', 'last_name', 'email', 'password'], 'required'],
+            [['username', 'first_name', 'last_name', 'email'], 'required'],
             [['username', 'first_name', 'last_name', 'email'], 'filter', 'filter' => 'trim'],
 
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],

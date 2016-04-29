@@ -17,11 +17,11 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'password')->passwordInput() ?>
-        <?= $form->field($model, 'role_id')->textInput() ?>
+        <?= $form->field($model, 'role_id')->dropDownList($model->roleList, ['prompt' => '- укажите роль пользователя -']) ?>
         <?= $form->field($model, 'status_id')->textInput() ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>

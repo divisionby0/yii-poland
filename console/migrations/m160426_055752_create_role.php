@@ -14,6 +14,10 @@ class m160426_055752_create_role extends Migration
 
         // Insert data
         $this->insert('role', [
+            'role_name' => 'Супер Админ',
+            'role_value' => '40',
+        ]);
+        $this->insert('role', [
             'role_name' => 'Администратор',
             'role_value' => '30',
         ]);

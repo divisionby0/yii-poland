@@ -7,10 +7,14 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use backend\models\Role;
 
 use common\models\User;
 use backend\models\UserCreateForm;
 use backend\models\UserSearch;
+
+use common\helpers\PermissionHelpers;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -48,6 +52,11 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            return $this->render('view', [
+                'model' => $this->findModel(Yii::$app->user->getId()),
+            ]);
+        }
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -82,6 +91,7 @@ class UserController extends Controller
                 return $this->redirect(['view', 'id' => $user->id]);
             }
         } else {
+            $model->roleList = ArrayHelper::map(Role::find()->asArray()->all(), 'role_value', 'role_name');
             return $this->render('create', [
             'model' => $model,
             ]);

@@ -106,6 +106,8 @@ class User extends ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'statusName' => 'Статус',
             'roleName' => 'Роль',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
         ];
     }
 

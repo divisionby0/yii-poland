@@ -37,20 +37,6 @@ class PermissionHelpers
     }
 
     /**
-     * method for requiring paid type user, if test fails, redirect to upgrade page
-     * $user_type_name handed in as 'string', 'Paid' for example.
-     *
-     * @param mixed $user_type_name
-     * @return \yii\web\Response
-     */
-    public static function requireUpgradeTo($user_type_name)
-    {
-        if(Yii::$app->user->identity->user_type_id != ValueHelpers::getUserTypeValue($user_type_name)) {
-            return Yii::$app->getResponse()->redirect(Url::to(['upgrade/index']));
-        }
-    }
-
-    /**
      * @requireStatus
      * @param mixed $status_name
      * @return boolean

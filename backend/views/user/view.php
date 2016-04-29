@@ -3,11 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use common\helpers\PermissionHelpers;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
 $this->title = $model->getFullName();
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -15,14 +17,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+        <?php
+        if(PermissionHelpers::requireMinimumRole('Супер Админ')) {
+            ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены, что хотите удалить пользователя ' . $model->getFullName() . '?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+            <?php
+        }
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'statusName',
             'roleName',
+            'created_at',
             'updated_at',
         ],
     ]) ?>
