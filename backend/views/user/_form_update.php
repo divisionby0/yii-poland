@@ -27,7 +27,7 @@ use common\helpers\PermissionHelpers;
         <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
     </div>
     <?php
-    if(PermissionHelpers::requireMinimumRole('Админ')) {
+    if(PermissionHelpers::requireMinimumRole('Администратор')) {
         ?>
         <div class="col-sm-6">
             <?= $form->field($model, 'role_id')->textInput() ?>

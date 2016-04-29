@@ -14,7 +14,7 @@ class UserCreateForm extends ActiveRecord
     public $email;
     public $password;
     public $role_id;
-    public $status_id;
+    //public $status_id;
     public $roleList;
 
     /**
@@ -39,6 +39,24 @@ class UserCreateForm extends ActiveRecord
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'string', 'min' => 6],
+        ];
+    }
+
+    /**
+     * Sets Labels for attributes
+     *
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'role_id' => 'Роль',
+            //'status_id' => 'Статус',
         ];
     }
 

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         if(PermissionHelpers::requireMinimumRole('Супер Админ')) {
             ?>
-            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Вы уверены, что хотите удалить пользователя ' . $model->getFullName() . '?',

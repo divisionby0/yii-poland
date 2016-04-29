@@ -10,6 +10,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
+use common\helpers\PermissionHelpers;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -28,22 +30,23 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Запись в консульство',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
     } else {
+        $user_label = PermissionHelpers::requireMinimumRole('Супервизор') ? 'Пользователи' : 'Ваш профиль';
+        $menuItems[] = ['label' => $user_label, 'url' => ['/user/index']];
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Выйти (' . Yii::$app->user->identity->fullName . ')',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()
