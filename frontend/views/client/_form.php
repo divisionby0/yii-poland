@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Client */
@@ -25,7 +26,17 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-sm-4">
-                    <?= $form->field($model, 'birthdate')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'birthdate')->widget(
+                        DatePicker::className(), [
+                        // inline too, not bad
+                        //'inline' => true,
+                        // modify template for custom rendering
+                        //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd-mm-yyyy'
+                        ]
+                    ]) ?>
                 </div>
             </div>
         </div>
