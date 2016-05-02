@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
+use frontend\assets\InputMaskAsset;
+
+InputMaskAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Client */
@@ -14,24 +17,46 @@ use dosamigos\datepicker\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-sm-2">
-            <?= $form->field($model, 'status_id')->dropDownList($model->clientStatusList, ['prompt' => '- - -']) ?>
-        </div>
-        <div class="col-sm-10">
+        <div class="col-md-6">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-3">
+                    <?= $form->field($model, 'status_id')->dropDownList($model->clientStatusList, ['prompt' => '- - -']) ?>
                 </div>
                 <div class="col-sm-4">
                     <?= $form->field($model, 'birthdate')->widget(
                         DatePicker::className(), [
-                        // inline too, not bad
-                        //'inline' => true,
-                        // modify template for custom rendering
-                        //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                        'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd-mm-yyyy'
+                        ]
+                    ]) ?>
+                </div>
+                <div class="col-sm-5">
+                    <?= $form->field($model, 'nationality_id')->dropDownList($model->clientNationalityList, ['prompt' => '- - -', 'options' => [219 => ['Selected'=>true]]]) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'passport_num')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'passport_expire')->widget(
+                        DatePicker::className(), [
                         'clientOptions' => [
                             'autoclose' => true,
                             'format' => 'dd-mm-yyyy'
@@ -40,39 +65,32 @@ use dosamigos\datepicker\DatePicker;
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <?= $form->field($model, 'passport_num')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'passport_expire')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'nationality_id')->dropDownList($model->clientNationalityList, ['prompt' => '- - -', 'options' => [219 => ['Selected'=>true]]]) ?>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'email')->textInput(['class' => 'form-control form-mask-email', 'maxlength' => true]) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-4">
-            <?= $form->field($model, 'ptn')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">
+            <?= $form->field($model, 'ptn')->textInput(['class' => 'form-control form-mask-ptn', 'maxlength' => true]) ?>
             <?= $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']) ?>
-            <?= $form->field($model, 'back_date')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'back_date')->widget(
+                DatePicker::className(), [
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy'
+                ]
+            ])  ?>
         </div>
         <div class="col-sm-8">
-            <?= $form->field($model, 'description')->textArea(['rows' => '5']) ?>
+            <?= $form->field($model, 'description')->textArea(['rows' => '8']) ?>
         </div>
     </div>
 
