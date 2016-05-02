@@ -30,6 +30,7 @@ use backend\models\client\ClientState;
  * @property string $passport_expire
  * @property string $back_date
  * @property integer $nationality_id
+ * @property string $description
  * @property integer $client_state_id
  * @property string $register_date
  * @property string $register_time
@@ -90,10 +91,12 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id', 'client_state_id', 'register_date', 'register_time', 'user_id'], 'required'],
+            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id'], 'required'],
             [['purpose_id', 'nationality_id', 'client_state_id', 'user_id'], 'integer'],
             [['client_state_id'], 'default', 'value' => 1],
+            [['user_id'], 'default', 'value' => Yii::$app->user->getId()],
             [['created_at', 'updated_at'], 'safe'],
+
             [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
             [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'back_date', 'register_date'], 'string', 'max' => 10],
             [['ptn'], 'string', 'max' => 14],
@@ -115,16 +118,21 @@ class Client extends \yii\db\ActiveRecord
             'status_id' => 'Статус',
             'birthdate' => 'Дата рождения',
             'purpose_id' => 'Цель',
+            'clientPurposeName' => 'Цель визита',
             'email' => 'Email',
             'password' => 'Пароль',
             'ptn' => 'ПТН',
-            'passport_num' => 'Номер пасспорта',
-            'passport_expire' => 'Пасспорт действителен до',
+            'passport_num' => 'Номер паспорта',
+            'passport_expire' => 'Паспорт действителен до',
             'back_date' => 'Дата возвращения',
-            'nationality_id' => 'Nationality ID',
-            'client_state_id' => 'Client State ID',
+            'nationality_id' => 'Национальность',
+            'clientNationalityName' => 'Национальность',
+            'description' => 'Дополнительная информация',
+            'client_state_id' => 'Состояние заявки',
+            'clientStateName' => 'Состояние заявки',
             'register_date' => 'Register Date',
             'register_time' => 'Register Time',
+            'user_id' => 'Пользователь',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -168,7 +176,7 @@ class Client extends \yii\db\ActiveRecord
      */
     public function getClientPurpose()
     {
-        return $this->hasOne(ClientPurpose::className(), ['id' => '$purpose_id']);
+        return $this->hasOne(ClientPurpose::className(), ['id' => 'purpose_id']);
     }
 
     /**
@@ -249,8 +257,34 @@ class Client extends \yii\db\ActiveRecord
         return ArrayHelper::map($droption, 'id', 'client_state');
     }
 
+    /**
+     * Get relation with user table
+     *
+     * @return object User
+     */
     public function getUser()
     {
-        $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * Get user full name
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->user ? $this->user->first_name . ' ' . $this->user->last_name : '-';
+    }
+
+    public function getUserList()
+    {
+        $droption = User::find()->all();
+        return ArrayHelper::map($droption, 'id',
+            function ($droption, $default_value)
+            {
+                return $droption->getFullName();
+            }
+        );
     }
 }
