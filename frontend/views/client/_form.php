@@ -86,7 +86,13 @@ InputMaskAsset::register($this);
     <div class="row">
         <div class="col-sm-3">
             <?= $form->field($model, 'ptn')->textInput(['class' => 'form-control form-mask-ptn', 'maxlength' => true]) ?>
-            <?= $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']) ?>
+            <?php
+            if ($model->isNewRecord) {
+                echo $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -', 'options' => [1 => ['Selected'=>true]]]);
+            } else {
+                echo $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']);
+            }
+            ?>
             <?= $form->field($model, 'back_date')->widget(
                 DatePicker::className(), [
                 'clientOptions' => [

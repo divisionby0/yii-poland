@@ -232,7 +232,7 @@ class Client extends \yii\db\ActiveRecord
 
     public function getClientNationalityList()
     {
-        $droption = ClientNationality::find()->asArray()->all();
+        $droption = ClientNationality::find()->where(['is_active' => 1])->asArray()->all();
         return ArrayHelper::map($droption, 'nationality_id', 'nationality');
     }
 

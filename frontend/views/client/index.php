@@ -35,11 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             'first_name',
             'last_name',
-            'status_id',
+            //'status_id',
             'birthdate',
             [
                 'attribute' => 'user_id',
                 'value' => 'userName',
+            ],
+            [
+                'attribute' => 'client_state_id',
+                'value' => 'clientStateName',
             ],
             // 'purpose_id',
             // 'email:email',
