@@ -16,19 +16,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Client', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить клиента', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model)
+        {
+            if ($model->client_state_id == 3 || $model->client_state_id == 4) {
+                return ['class' => 'danger'];
+            } elseif ($model->client_state_id == 5) {
+                return ['class' => 'success'];
+            }
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'first_name',
             'last_name',
             'status_id',
             'birthdate',
+            [
+                'attribute' => 'user_id',
+                'value' => 'userName',
+            ],
             // 'purpose_id',
             // 'email:email',
             // 'password',
@@ -44,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_at',
             // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'common\components\ActionColumn'],
         ],
     ]); ?>
 </div>

@@ -42,7 +42,13 @@ InputMaskAsset::register($this);
                     ]) ?>
                 </div>
                 <div class="col-sm-5">
-                    <?= $form->field($model, 'nationality_id')->dropDownList($model->clientNationalityList, ['prompt' => '- - -', 'options' => [219 => ['Selected'=>true]]]) ?>
+                    <?php
+                    if ($model->isNewRecord) {
+                        echo $form->field($model, 'nationality_id')->dropDownList($model->clientNationalityList, ['prompt' => '- - -', 'options' => [219 => ['Selected'=>true]]]);
+                    } else {
+                        echo $form->field($model, 'nationality_id')->dropDownList($model->clientNationalityList, ['prompt' => '- - -']);
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -78,7 +84,7 @@ InputMaskAsset::register($this);
     </div>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <?= $form->field($model, 'ptn')->textInput(['class' => 'form-control form-mask-ptn', 'maxlength' => true]) ?>
             <?= $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']) ?>
             <?= $form->field($model, 'back_date')->widget(
@@ -102,12 +108,20 @@ InputMaskAsset::register($this);
                     'format' => 'dd-mm-yyyy'
                 ]
             ])  ?>
+
+            <?php
+            if (!$model->isNewRecord) {
+                ?>
+                <?= $form->field($model, 'client_state_id')->dropDownList($model->clientStateList) ?>
+                <?php
+            }
+            ?>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-5">
 
         </div>
         <div class="col-sm-4">
-            <?= $form->field($model, 'description')->textArea(['rows' => '8']) ?>
+            <?= $form->field($model, 'description')->textArea(['rows' => '6']) ?>
         </div>
     </div>
 

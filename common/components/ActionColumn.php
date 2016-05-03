@@ -142,7 +142,7 @@ class ActionColumn extends Column
                     'data-pjax' => '0',
                     'class' => 'btn btn-success btn-sm'
                 ], $this->buttonOptions);
-                return Html::a('Детали <span class="glyphicon glyphicon-eye-open"></span>', $url, $options);
+                return Html::a('Детали', $url, $options);
             };
         }
         if (!isset($this->buttons['update'])) {

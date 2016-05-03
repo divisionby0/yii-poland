@@ -136,7 +136,7 @@ class Client extends \yii\db\ActiveRecord
             'desired_date_end' => 'Желаемая дата подачи до:',
             'register_date' => 'Дата подачи документов',
             'register_time' => 'Время подачи документов',
-            'user_id' => 'Пользователь',
+            'user_id' => 'Агент',
             'userName' => 'Имя агента',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
