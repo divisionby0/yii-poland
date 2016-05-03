@@ -13,6 +13,7 @@ use backend\models\client\ClientStatus;
 use backend\models\client\ClientPurpose;
 use backend\models\client\ClientNationality;
 use backend\models\client\ClientState;
+use backend\models\client\ClientPpva;
 
 /**
  * This is the model class for table "client".
@@ -296,5 +297,11 @@ class Client extends \yii\db\ActiveRecord
                 return $droption->getFullName();
             }
         );
+    }
+
+    public function getPpvaList()
+    {
+        $droption = ClientPpva::find()->where(['is_active' => 1])->asArray()->all();
+        return ArrayHelper::map($droption, 'ppva_id', 'ppva');
     }
 }

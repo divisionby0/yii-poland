@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 use frontend\assets\InputMaskAsset;
 
@@ -93,6 +93,17 @@ InputMaskAsset::register($this);
                 echo $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']);
             }
             ?>
+
+            <?php
+            if (!$model->isNewRecord) {
+                ?>
+                <?= $form->field($model, 'client_state_id')->dropDownList($model->clientStateList) ?>
+                <?php
+            }
+            ?>
+            <?= $form->field($model, 'created_at')->checkboxList($model->ppvaList) ?>
+        </div>
+        <div class="col-sm-3">
             <?= $form->field($model, 'back_date')->widget(
                 DatePicker::className(), [
                 'clientOptions' => [
@@ -114,19 +125,8 @@ InputMaskAsset::register($this);
                     'format' => 'dd-mm-yyyy'
                 ]
             ])  ?>
-
-            <?php
-            if (!$model->isNewRecord) {
-                ?>
-                <?= $form->field($model, 'client_state_id')->dropDownList($model->clientStateList) ?>
-                <?php
-            }
-            ?>
         </div>
-        <div class="col-sm-5">
-
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <?= $form->field($model, 'description')->textArea(['rows' => '6']) ?>
         </div>
     </div>

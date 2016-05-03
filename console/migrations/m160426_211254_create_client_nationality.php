@@ -10,7 +10,7 @@ class m160426_211254_create_client_nationality extends Migration
             'id' => $this->primaryKey(),
             'nationality_id' => $this->integer(6)->unsigned()->notNull(),
             'nationality' => $this->string(65)->notNull(),
-            'is_active' => $this->int(1)->notNull()
+            'is_active' => $this->integer(1)->notNull()
         ]);
 
         // Insert data

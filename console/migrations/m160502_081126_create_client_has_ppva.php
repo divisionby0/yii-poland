@@ -7,7 +7,8 @@ class m160502_081126_create_client_has_ppva extends Migration
     public function up()
     {
         $this->createTable('client_has_ppva', [
-            'id' => $this->primaryKey()
+            'client_id' => $this->integer(11)->notNull(),
+            'ppva_id' => $this->integer(11)->notNull()
         ]);
     }
 

@@ -10,7 +10,8 @@ class m160426_164923_create_client_ppva extends Migration
         $this->createTable('client_ppva', [
             'id' => $this->primaryKey(),
             'ppva_id' => $this->integer(6)->unsigned()->notNull(),
-            'ppva' => $this->string(65)->notNull()
+            'ppva' => $this->string(65)->notNull(),
+            'is_active' => $this->integer(1)->notNull()
         ]);
 
         // Insert data
