@@ -40,7 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'first_name',
             'last_name',
             'email:email',
-            'roleName',
+            [
+                'attribute' => 'role_id',
+                'value' => 'roleName',
+            ],
             'statusName',
 
             ['class' => 'common\components\ActionColumn'],

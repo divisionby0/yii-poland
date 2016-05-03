@@ -108,6 +108,7 @@ class User extends ActiveRecord implements IdentityInterface
             'roleName' => 'Роль',
             'created_at' => 'Создан',
             'updated_at' => 'Обновлен',
+            'role_id' => 'Роль'
         ];
     }
 
