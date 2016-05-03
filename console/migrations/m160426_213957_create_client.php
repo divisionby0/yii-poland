@@ -22,6 +22,8 @@ class m160426_213957_create_client extends Migration
             'nationality_id' => $this->integer(6)->notNull(),
             'description' => $this->text(),
             'client_state_id' => $this->integer(11)->notNull()->defaultValue(1),
+            'desired_date_start' => $this->string(10)->notNull(),
+            'desired_date_end' => $this->string(10)->notNull(),
             'register_date' => $this->string(10)->notNull(),
             'register_time' => $this->string(5)->notNull(),
             'user_id' => $this->integer()->notNull(),

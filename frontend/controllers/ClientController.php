@@ -16,6 +16,9 @@ use frontend\models\ClientSearch;
  */
 class ClientController extends Controller
 {
+
+    public $index_label = 'Список клиентов';
+
     /**
      * @inheritdoc
      */
@@ -54,6 +57,7 @@ class ClientController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'index_label' => $this->index_label,
         ]);
     }
 
@@ -66,6 +70,7 @@ class ClientController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'index_label' => $this->index_label,
         ]);
     }
 
@@ -83,6 +88,7 @@ class ClientController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }
@@ -102,6 +108,7 @@ class ClientController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'index_label' => $this->index_label,
             ]);
         }
     }

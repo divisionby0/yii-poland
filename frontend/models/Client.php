@@ -32,6 +32,8 @@ use backend\models\client\ClientState;
  * @property integer $nationality_id
  * @property string $description
  * @property integer $client_state_id
+ * @property integer $desired_date_start
+ * @property integer $desired_date_end
  * @property string $register_date
  * @property string $register_time
  * @property integer $user_id
@@ -98,7 +100,7 @@ class Client extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
 
             [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
-            [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'back_date', 'register_date'], 'string', 'max' => 10],
+            [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'desired_date_start', 'desired_date_end', 'back_date', 'register_date'], 'string', 'max' => 10],
             [['ptn'], 'string', 'max' => 14],
             [['register_time'], 'string', 'max' => 5],
             [['client_state_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientState::className(), 'targetAttribute' => ['client_state_id' => 'id']],
@@ -130,12 +132,20 @@ class Client extends \yii\db\ActiveRecord
             'description' => 'Дополнительная информация',
             'client_state_id' => 'Состояние заявки',
             'clientStateName' => 'Состояние заявки',
-            'register_date' => 'Register Date',
-            'register_time' => 'Register Time',
+            'desired_date_start' => 'Желаемая дата подачи от:',
+            'desired_date_end' => 'Желаемая дата подачи до:',
+            'register_date' => 'Дата подачи документов',
+            'register_time' => 'Время подачи документов',
             'user_id' => 'Пользователь',
+            'userName' => 'Имя агента',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getClientFullNameName()
+    {
+        return $this->first_name . " " . $this->last_name;
     }
 
     /**

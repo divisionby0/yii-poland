@@ -88,8 +88,25 @@ InputMaskAsset::register($this);
                     'format' => 'dd-mm-yyyy'
                 ]
             ])  ?>
+            <?= $form->field($model, 'desired_date_start')->widget(
+                DatePicker::className(), [
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy'
+                ]
+            ])  ?>
+            <?= $form->field($model, 'desired_date_end')->widget(
+                DatePicker::className(), [
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy'
+                ]
+            ])  ?>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4">
             <?= $form->field($model, 'description')->textArea(['rows' => '8']) ?>
         </div>
     </div>
@@ -107,7 +124,7 @@ InputMaskAsset::register($this);
     <?php // $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
