@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\ClientHasPpva;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -140,5 +141,10 @@ class ClientController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    protected function saveClient(Client $client, ClientHasPpva $clientHasPpva)
+    {
+
     }
 }

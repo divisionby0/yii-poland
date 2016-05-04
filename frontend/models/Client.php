@@ -57,6 +57,8 @@ use backend\models\client\ClientPpva;
  * @property string $clientStateName
  * @property array $clientStateList
  *
+ * @property array $ppvaList
+ *
  * @property User $user
  */
 class Client extends \yii\db\ActiveRecord
@@ -141,6 +143,7 @@ class Client extends \yii\db\ActiveRecord
             'userName' => 'Имя агента',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'ppvaList' => 'ППВА',
         ];
     }
 
