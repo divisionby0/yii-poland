@@ -2,7 +2,6 @@
 
 namespace frontend\controllers;
 
-use frontend\models\ClientHasPpva;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,6 +10,7 @@ use yii\filters\VerbFilter;
 
 use frontend\models\Client;
 use frontend\models\ClientSearch;
+use frontend\models\ClientHasPpva;
 
 /**
  * ClientController implements the CRUD actions for Client model.
@@ -83,6 +83,7 @@ class ClientController extends Controller
     public function actionCreate()
     {
         $model = new Client();
+        $has_ppva = new ClientHasPpva();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
