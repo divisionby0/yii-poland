@@ -83,7 +83,6 @@ class ClientController extends Controller
     public function actionCreate()
     {
         $model = new Client();
-        $has_ppva = new ClientHasPpva();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

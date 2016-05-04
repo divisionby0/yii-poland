@@ -4,11 +4,13 @@ namespace backend\models\client;
 
 use Yii;
 
+use frontend\models\Client;
+
 /**
  * This is the model class for table "client_ppva".
  *
  * @property integer $id
- * @property string $ppva_id
+ * @property integer $ppva_id
  * @property string $ppva
  */
 class ClientPpva extends \yii\db\ActiveRecord
@@ -43,5 +45,16 @@ class ClientPpva extends \yii\db\ActiveRecord
             'ppva_id' => 'Идентификатор ППВА',
             'ppva' => 'Название ППВА',
         ];
+    }
+
+    /**
+     * Get relation with Client model
+     *
+     * @return $this
+     */
+    public function getClients()
+    {
+        return $this->hasMany(Client::className(), ['id' => 'client_id'])
+            ->viaTable('client_has_ppva', ['ppva_id' => 'ppva_id']);
     }
 }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Client */
 
-$this->title = $model->clientFullNameName;
+$this->title = $model->clientFullName;
 $this->params['breadcrumbs'][] = ['label' => $index_label, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+
         'attributes' => [
             'first_name',
             'last_name',
@@ -45,7 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'clientStateName',
             'register_date',
             'register_time',
-            'hasPpvasString',
+            [
+                'attribute' => 'hasPpvasString',
+                'format' => 'raw'
+            ],
             'userName',
         ],
     ]) ?>

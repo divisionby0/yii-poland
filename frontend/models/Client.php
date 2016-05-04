@@ -148,10 +148,11 @@ class Client extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'ppvaList' => 'ППВА',
+            'hasPpvasString' => 'Список ППВА',
         ];
     }
 
-    public function getClientFullNameName()
+    public function getClientFullName()
     {
         return $this->first_name . " " . $this->last_name;
     }
@@ -339,15 +340,11 @@ class Client extends \yii\db\ActiveRecord
 
     public function getHasPpvasString()
     {
-        $ppvas_string = '';
-
-        // var_dump($this->getHasPpvas());
-        // die();
-        foreach ($this->getHasPpvas() as $hasPpva) {
-            $ppvas_string .= $this->getPpvaName($hasPpva) . ' ';
+        $ppva_array = [];
+        foreach ($this->ppvas as $ppva) {
+            $ppva_array[] = $ppva->ppva;
         }
-
-        return $ppvas_string;
+        return implode(',<br>', $ppva_array);
     }
 
     public function afterSave($insert, $changedAttributes)
