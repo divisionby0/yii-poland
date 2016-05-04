@@ -60,9 +60,13 @@ use backend\models\client\ClientPpva;
  * @property array $ppvaList
  *
  * @property User $user
+ * @property array $userList
  */
 class Client extends \yii\db\ActiveRecord
 {
+
+    protected $hasPpvas = [];
+
     /**
      * Table name
      */
@@ -100,7 +104,7 @@ class Client extends \yii\db\ActiveRecord
             [['purpose_id', 'nationality_id', 'client_state_id', 'user_id'], 'integer'],
             [['client_state_id'], 'default', 'value' => 1],
             [['user_id'], 'default', 'value' => Yii::$app->user->getId()],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'hasPpvas'], 'safe'],
 
             [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
             [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'desired_date_start', 'desired_date_end', 'back_date', 'register_date'], 'string', 'max' => 10],
@@ -291,6 +295,11 @@ class Client extends \yii\db\ActiveRecord
         return $this->user ? $this->user->first_name . ' ' . $this->user->last_name : '-';
     }
 
+    /**
+     * Get User list for dropdown
+     *
+     * @return array
+     */
     public function getUserList()
     {
         $droption = User::find()->all();
@@ -302,6 +311,67 @@ class Client extends \yii\db\ActiveRecord
         );
     }
 
+    public function setHasPpvas(array $hasPpvas)
+    {
+        $this->hasPpvas = $hasPpvas;
+    }
+
+    public function getHasPpvas()
+    {
+        if(!count($this->hasPpvas)) {
+            return $this->hasPpvas = ArrayHelper::getColumn($this->getPpvas()->all(), 'ppva_id');
+        } else {
+            return $this->hasPpvas;
+        }
+    }
+
+    public function getPpvas()
+    {
+        return $this->hasMany(ClientPpva::className(), ['ppva_id' => 'ppva_id'])
+            ->viaTable('client_has_ppva', ['client_id' => 'id']);
+    }
+
+    public function getPpvaName($ppva_id)
+    {
+        $ppva = ClientPpva::find()->where(['ppva_id' => $ppva_id])->one();
+        return $ppva->ppva;
+    }
+
+    public function getHasPpvasString()
+    {
+        $ppvas_string = '';
+
+        // var_dump($this->getHasPpvas());
+        // die();
+        foreach ($this->getHasPpvas() as $hasPpva) {
+            $ppvas_string .= $this->getPpvaName($hasPpva) . ' ';
+        }
+
+        return $ppvas_string;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->updateHasPpvas();
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function updateHasPpvas()
+    {
+        ClientHasPpva::deleteAll(array('client_id' => $this->id));
+        foreach ($this->hasPpvas as $ppva_id) {
+            $clientHasPpva = new ClientHasPpva();
+            $clientHasPpva->client_id = $this->id;
+            $clientHasPpva->ppva_id = $ppva_id;
+            $clientHasPpva->save();
+        }
+    }
+
+    /**
+     * Get PPVA list for dropdown
+     *
+     * @return array
+     */
     public function getPpvaList()
     {
         $droption = ClientPpva::find()->where(['is_active' => 1])->asArray()->all();

@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'clientStateName',
             'register_date',
             'register_time',
+            'hasPpvasString',
             'userName',
         ],
     ]) ?>

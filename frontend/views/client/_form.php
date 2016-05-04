@@ -101,7 +101,7 @@ InputMaskAsset::register($this);
                 <?php
             }
             ?>
-            <?= $form->field($model, 'ppvaList')->checkboxList($model->ppvaList) ?>
+            <?= $form->field($model, 'hasPpvas')->checkboxList($model->ppvaList) ?>
         </div>
         <div class="col-sm-3">
             <?= $form->field($model, 'back_date')->widget(
