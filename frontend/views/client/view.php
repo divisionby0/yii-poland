@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'passport_expire',
             'back_date',
             'clientNationalityName',
+            'price',
             'desired_date_start',
             'desired_date_end',
             'clientStateName',

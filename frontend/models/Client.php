@@ -32,6 +32,7 @@ use backend\models\client\ClientPpva;
  * @property string $back_date
  * @property integer $nationality_id
  * @property string $description
+ * @property string $price
  * @property integer $client_state_id
  * @property integer $desired_date_start
  * @property integer $desired_date_end
@@ -107,7 +108,7 @@ class Client extends \yii\db\ActiveRecord
             [['created_at', 'updated_at', 'hasPpvas'], 'safe'],
 
             [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
-            [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'desired_date_start', 'desired_date_end', 'back_date', 'register_date'], 'string', 'max' => 10],
+            [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'desired_date_start', 'desired_date_end', 'back_date', 'register_date', 'price'], 'string', 'max' => 10],
             [['ptn'], 'string', 'max' => 14],
             [['register_time'], 'string', 'max' => 5],
             [['client_state_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientState::className(), 'targetAttribute' => ['client_state_id' => 'id']],
@@ -135,6 +136,7 @@ class Client extends \yii\db\ActiveRecord
             'passport_expire' => 'Паспорт действителен до',
             'back_date' => 'Дата возвращения',
             'nationality_id' => 'Национальность',
+            'price' => 'Сумма',
             'clientNationalityName' => 'Национальность',
             'description' => 'Дополнительная информация',
             'client_state_id' => 'Состояние заявки',
@@ -239,6 +241,11 @@ class Client extends \yii\db\ActiveRecord
         return $this->clientNationality ? $this->clientNationality->nationality : '-';
     }
 
+    /**
+     * Get Client status list for dropdown
+     *
+     * @return array
+     */
     public function getClientNationalityList()
     {
         $droption = ClientNationality::find()->where(['is_active' => 1])->asArray()->all();
@@ -332,11 +339,11 @@ class Client extends \yii\db\ActiveRecord
             ->viaTable('client_has_ppva', ['client_id' => 'id']);
     }
 
-    public function getPpvaName($ppva_id)
-    {
-        $ppva = ClientPpva::find()->where(['ppva_id' => $ppva_id])->one();
-        return $ppva->ppva;
-    }
+//    public function getPpvaName($ppva_id)
+//    {
+//        $ppva = ClientPpva::find()->where(['ppva_id' => $ppva_id])->one();
+//        return $ppva->ppva;
+//    }
 
     public function getHasPpvasString()
     {

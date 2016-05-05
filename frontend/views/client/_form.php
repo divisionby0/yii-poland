@@ -93,7 +93,7 @@ InputMaskAsset::register($this);
                 echo $form->field($model, 'purpose_id')->dropDownList($model->clientPurposeList, ['prompt' => '- - -']);
             }
             ?>
-
+            <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
             <?php
             if (!$model->isNewRecord) {
                 ?>

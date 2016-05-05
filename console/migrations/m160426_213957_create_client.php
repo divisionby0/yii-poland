@@ -20,6 +20,7 @@ class m160426_213957_create_client extends Migration
             'passport_expire' => $this->string(10)->notNull(),
             'back_date' => $this->string(10)->notNull(),
             'nationality_id' => $this->integer(6)->notNull(),
+            'price' => $this->string(10)->notNull(),
             'description' => $this->text(),
             'client_state_id' => $this->integer(11)->notNull()->defaultValue(1),
             'desired_date_start' => $this->string(10)->notNull(),

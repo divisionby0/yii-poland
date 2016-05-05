@@ -25,6 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'birthdate') ?>
 
+    <?= $form->field($model, 'price') ?>
+
+    <?= $form->field($model, 'hasPpvasString') ?>
+
     <?php // echo $form->field($model, 'purpose_id') ?>
 
     <?php // echo $form->field($model, 'email') ?>

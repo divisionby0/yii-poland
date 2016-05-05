@@ -45,6 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'client_state_id',
                 'value' => 'clientStateName',
             ],
+            [
+                'attribute' => 'hasPpvasString',
+                'format' => 'raw'
+            ],
             // 'purpose_id',
             // 'email:email',
             // 'password',

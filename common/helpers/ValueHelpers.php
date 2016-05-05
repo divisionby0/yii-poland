@@ -37,22 +37,4 @@ class ValueHelpers
 
         return $result['status_value'];
     }
-
-    /**
-     * returns value of user_type_name so that you can
-     * used in PermissionHelpers methods
-     * handed in as string, example: 'Paid'
-     *
-     * @param mixed $user_type_name
-     */
-    public static function getUserTypeValue($user_type_name)
-    {
-        $connection = \Yii::$app->db;
-        $sql = "SELECT user_type_value FROM user_type WHERE user_type_name=:user_type_name";
-        $command = $connection->createCommand($sql);
-        $command->bindValue(":user_type_name", $user_type_name);
-        $result = $command->queryOne();
-
-        return $result['user_type_value'];
-    }
 }

@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\helpers\PermissionHelpers;
+use common\helpers\ValueHelpers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -69,6 +71,11 @@ class ClientController extends Controller
      */
     public function actionView($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            if (!PermissionHelpers::userMustBeOwner('client', $id)) {
+                return $this->redirect(['index']);
+            }
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
             'index_label' => $this->index_label,
@@ -102,6 +109,11 @@ class ClientController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            if (!PermissionHelpers::userMustBeOwner('client', $id)) {
+                return $this->redirect(['index']);
+            }
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -122,6 +134,11 @@ class ClientController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!PermissionHelpers::requireMinimumRole('Супервизор')) {
+            if (!PermissionHelpers::userMustBeOwner('client', $id)) {
+                return $this->redirect(['index']);
+            }
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
