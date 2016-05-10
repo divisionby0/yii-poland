@@ -33,9 +33,9 @@ AppAsset::register($this);
         <!-- Logo -->
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>P</b>DEV</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Poland</b>DEV</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -279,7 +279,6 @@ AppAsset::register($this);
         </nav>
     </header>
 
-
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -449,22 +448,22 @@ AppAsset::register($this);
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                <?= Html::encode($this->title) ?>
                 <small>Control panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
         </section>
 
-    </div>
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <?= Alert::widget() ?>
+                <?= $content ?>
+            </div>
+        </section>
+
     </div>
 </div>
 
