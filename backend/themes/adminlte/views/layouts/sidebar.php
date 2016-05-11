@@ -4,6 +4,7 @@
  * Contains the logo and sidebar
  */
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <aside class="main-sidebar">
@@ -32,6 +33,37 @@ use yii\helpers\Html;
             </div>
         </form>
         <!-- /.search form -->
+
+        <?= backend\themes\adminlte\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
+                    ['label' => 'Main Menu', 'options' => ['class' => 'header']],
+                    [
+                        'label' => 'Пользователи',
+                        'icon' => 'fa fa-users',
+                        'url' => Url::to(['/user']),
+                        'active' => $this->context->route == 'user/index',
+                    ],
+                    [
+                        'label' => 'Настройки',
+                        'icon' => 'fa fa-gears',
+                        'url' => ['#'],
+                        'items' => [
+                            [
+                                'label' => 'Пользователи',
+                                'icon' => 'fa fa-users',
+                                'url' => Url::to(['/user']),
+                                'active' => $this->context->route == 'user/index',
+                            ],
+                        ],
+                    ],
+                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
+                ]
+            ]
+        )
+        ?>
+
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
