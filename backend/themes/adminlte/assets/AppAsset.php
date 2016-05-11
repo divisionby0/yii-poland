@@ -1,9 +1,4 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
 
 namespace backend\themes\adminlte\assets;
 
@@ -18,9 +13,10 @@ class AppAsset extends AssetBundle
         'plugins/ionicons/css/ionicons.min.css',
         'css/AdminLTE.min.css',
         'css/skins/_all-skins.min.css',
-        'css/site12.css',
+        'css/site.css',
     ];
     public $js = [
+        'js/app.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
