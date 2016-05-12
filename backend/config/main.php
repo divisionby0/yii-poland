@@ -44,6 +44,12 @@ return [
             ],
         ],
         */
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName'=>false,
+            'baseUrl' => 'http://poland.loc/',
+        ]
     ],
     'params' => $params,
 ];
