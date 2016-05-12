@@ -206,50 +206,7 @@ use yii\helpers\Html;
                     </ul>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <?= Html::img($directoryAsset . '/img/user-admin-male-01.png', [
-                            'class' => 'user-image',
-                            'alt' => 'User Image'
-                        ]) ?>
-                        <span class="hidden-xs"><?=  Yii::$app->user->identity->fullName ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <?= Html::img($directoryAsset . '/img/user-admin-male-01.png', [
-                                'class' => 'img-circle',
-                                'alt' => 'User Image'
-                            ]) ?>
-                            <p>
-                                <strong><?=  Yii::$app->user->identity->fullName ?></strong><br>
-                                <?=  Yii::$app->user->identity->roleName ?>
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                <?= $this->render('user-dropdown.php', ['directoryAsset' => $directoryAsset])?>
                 <!-- Control Sidebar Toggle Button -->
                 <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
