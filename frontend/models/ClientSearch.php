@@ -7,6 +7,8 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Client;
 
+use common\helpers\PermissionHelpers;
+
 /**
  * ClientSearch represents the model behind the search form about `frontend\models\Client`.
  */
@@ -41,7 +43,11 @@ class ClientSearch extends Client
      */
     public function search($params)
     {
-        $query = Client::find();
+        if (PermissionHelpers::requireMinimumRole('Супервизор')) {
+            $query = Client::find();
+        } else {
+            $query = Client::find()->where(['user_id' => Yii::$app->user->identity->id]);
+        }
 
         // add conditions that should always apply here
 

@@ -11,9 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => $model->purpose, 'url' => ['view', 
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="client-purpose-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

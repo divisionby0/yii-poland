@@ -11,9 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => $model->status, 'url' => ['view', '
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="client-status-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
