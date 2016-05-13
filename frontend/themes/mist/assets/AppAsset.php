@@ -1,21 +1,13 @@
 <?php
 
-namespace frontend\themes\flat\assets;
+namespace frontend\themes\mist\assets;
 
 use yii\web\AssetBundle;
 
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web/themes/flat';
-
-    public $css = [
-        'plugins/font-awesome/css/font-awesome.min.css',
-        'css/main.css',
-    ];
-    public $js = [
-        'js/app.js',
-    ];
+    public $baseUrl = '@web/themes/mist';
 
     public $depends = [
         'yii\web\YiiAsset',

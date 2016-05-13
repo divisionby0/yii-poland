@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use frontend\themes\flat\assets\AppAsset;
+use frontend\themes\mist\assets\AppAsset;
 use common\helpers\PermissionHelpers;
 
 $bundle = AppAsset::register($this);
@@ -26,11 +26,6 @@ $directoryAsset = $bundle->baseUrl;
 
 <body>
 <?php $this->beginBody() ?>
-
-<?= $this->render('header.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('content.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('footer.php', ['directoryAsset' => $directoryAsset])?>
-
 <?php $this->endBody() ?>
 </body>
 </html>

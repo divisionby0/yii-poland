@@ -1,18 +1,21 @@
 <?php
 
-namespace frontend\themes\flat\assets;
+namespace frontend\themes\foundry\assets;
 
 use yii\web\AssetBundle;
 
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web/themes/flat';
+    public $baseUrl = '@web/themes/foundry';
 
     public $css = [
         'plugins/font-awesome/css/font-awesome.min.css',
-        'css/main.css',
+        'plugins/themify-icons/themify-icons.css',
+        'css/theme.css',
+        'css/custom.css',
     ];
+
     public $js = [
         'js/app.js',
     ];

@@ -27,10 +27,6 @@ $directoryAsset = $bundle->baseUrl;
 <body>
 <?php $this->beginBody() ?>
 
-<?= $this->render('header.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('content.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('footer.php', ['directoryAsset' => $directoryAsset])?>
-
 <?php $this->endBody() ?>
 </body>
 </html>
