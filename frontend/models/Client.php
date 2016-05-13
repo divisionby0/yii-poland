@@ -101,13 +101,20 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id'], 'required'],
+            [['first_name', 'last_name', 'status_id', 'birthdate', 'purpose_id', 'email', 'password', 'ptn', 'passport_num', 'passport_expire', 'back_date', 'nationality_id'], 'required', 'message' => 'Это поле не может быть пустым'],
             [['purpose_id', 'nationality_id', 'client_state_id', 'user_id'], 'integer'],
             [['client_state_id'], 'default', 'value' => 1],
             [['user_id'], 'default', 'value' => Yii::$app->user->getId()],
             [['created_at', 'updated_at', 'hasPpvas'], 'safe'],
+            ['email', 'email'],
 
-            [['first_name', 'last_name', 'email', 'password'], 'string', 'max' => 255],
+            ['password', 'string', 'min' => 9, 'max' => 15, 'message' => 'Пароль должен содержать минимум 9 символов и не более 15'],
+
+            ['email', 'unique', 'message' => 'Клиент с таким email уже существует'],
+            ['ptn', 'unique', 'message' => 'Клиент с таким ПТН уже существует'],
+            ['passport_num', 'unique', 'message' => 'Клиент с таким номером паспорта уже существует'],
+
+            [['first_name', 'last_name', 'email'], 'string', 'max' => 255],
             [['status_id', 'birthdate', 'passport_num', 'passport_expire', 'desired_date_start', 'desired_date_end', 'back_date', 'register_date', 'price'], 'string', 'max' => 10],
             [['ptn'], 'string', 'max' => 14],
             [['register_time'], 'string', 'max' => 5],
@@ -150,6 +157,7 @@ class Client extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'ppvaList' => 'ППВА',
+            'hasPpvas' => 'ППВА',
             'hasPpvasString' => 'Список ППВА',
         ];
     }
