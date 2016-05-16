@@ -25,13 +25,16 @@ $directoryAsset = $bundle->baseUrl;
 </head>
 
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<?= $this->render('header.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('content.php', ['directoryAsset' => $directoryAsset])?>
-<?= $this->render('footer.php', ['directoryAsset' => $directoryAsset])?>
+    <?= $this->render('header.php', ['directoryAsset' => $directoryAsset])?>
+    <?= $this->render(
+        'content.php',
+        ['content' => $content, 'directoryAsset' => $directoryAsset]
+    ) ?>
+    <?= $this->render('footer.php', ['directoryAsset' => $directoryAsset])?>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -1087,3 +1087,26 @@ ul.faq li > div h3 {
   margin-top: 150px;
   margin-bottom: 150px;
 }
+
+.navbar-brand > img {
+    display: inline;
+}
+.navbar-brand {
+     float: left;
+     height: 80px;
+     padding: 15px 15px;
+     font-size: 18px;
+     line-height: 20px;
+ }
+
+/* =============================
+    Content
+   ============================= */
+th.action-column {
+    text-align: center;
+    width: 180px;
+}
+th.ppva-column {
+    text-align: center;
+    width: 250px;
+}
