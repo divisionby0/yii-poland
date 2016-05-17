@@ -2,13 +2,13 @@
 
 namespace frontend\models;
 
-use common\models\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
+use common\models\User;
 use backend\models\client\ClientStatus;
 use backend\models\client\ClientPurpose;
 use backend\models\client\ClientNationality;

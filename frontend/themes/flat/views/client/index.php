@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+
+use backend\models\client\ClientState;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\ClientSearch */
@@ -30,24 +34,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
             'first_name',
             'last_name',
-            //'status_id',
-            //'birthdate',
             [
                 'attribute' => 'user_id',
+                'filter' => $searchModel->getUserList(),
                 'value' => 'userName',
             ],
             [
                 'attribute' => 'client_state_id',
+                'filter' => $searchModel->getClientStateList(),
                 'value' => 'clientStateName',
+                'contentOptions' => ['class' => 'text-center'],
             ],
             [
                 'attribute' => 'hasPpvasString',
                 'format' => 'raw',
                 'headerOptions' => ['class' => 'ppva-column']
             ],
+            [
+                'class' => 'common\components\ActionColumn',
+                'contentOptions' => ['class' => 'text-center'],
+            ],
+            // 'id',
+            //'status_id',
+            //'birthdate',
             // 'purpose_id',
             // 'email:email',
             // 'password',
@@ -62,11 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'user_id',
             // 'created_at',
             // 'updated_at',
-
-            [
-                'class' => 'common\components\ActionColumn',
-                'contentOptions' => ['class' => 'text-center'],
-            ],
         ],
     ]); ?>
 </div>

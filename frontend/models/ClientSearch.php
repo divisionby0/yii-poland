@@ -75,17 +75,17 @@ class ClientSearch extends Client
         ]);
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'status_id', $this->status_id])
-            ->andFilterWhere(['like', 'birthdate', $this->birthdate])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'ptn', $this->ptn])
-            ->andFilterWhere(['like', 'passport_num', $this->passport_num])
-            ->andFilterWhere(['like', 'passport_expire', $this->passport_expire])
-            ->andFilterWhere(['like', 'back_date', $this->back_date])
-            ->andFilterWhere(['like', 'register_date', $this->register_date])
-            ->andFilterWhere(['like', 'register_time', $this->register_time]);
+              ->andFilterWhere(['like', 'last_name', $this->last_name])
+              ->andFilterWhere(['like', 'status_id', $this->status_id])
+              ->andFilterWhere(['like', 'birthdate', $this->birthdate])
+              ->andFilterWhere(['like', 'email', $this->email])
+              ->andFilterWhere(['like', 'password', $this->password])
+              ->andFilterWhere(['like', 'ptn', $this->ptn])
+              ->andFilterWhere(['like', 'passport_num', $this->passport_num])
+              ->andFilterWhere(['like', 'passport_expire', $this->passport_expire])
+              ->andFilterWhere(['like', 'back_date', $this->back_date])
+              ->andFilterWhere(['like', 'register_date', $this->register_date])
+              ->andFilterWhere(['like', 'register_time', $this->register_time]);
 
         return $dataProvider;
     }
